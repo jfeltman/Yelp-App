@@ -1,0 +1,46 @@
+﻿<Window x:Class="TeamTeamwork_Yelp_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeamTeamwork_Yelp_App"
+        mc:Ignorable="d"
+        Title="Yelp" Height="650" Width="950" ResizeMode="NoResize">
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="User Information">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Business Search">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Select Location" HorizontalAlignment="Left" Height="274" Margin="2,0,0,0" VerticalAlignment="Top" Width="180"/>
+                    <Label Content="State" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,24,0,0"/>
+                    <ComboBox x:Name="stateList" HorizontalAlignment="Left" Margin="52,28,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="stateList_selectionChanged"/>
+                    <Label Content="City" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,55,0,0"/>
+                    <ListBox x:Name="cityList" HorizontalAlignment="Left" Height="79" Margin="10,78,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="cityList_selectionChanged"/>
+                    <Label Content="Zip Code" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top"/>
+                    <ListBox x:Name="zipList" HorizontalAlignment="Left" Height="79" Margin="10,185,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="zipList_selectionChanged"/>
+                    <GroupBox Header="Business Category" HorizontalAlignment="Left" Height="282" Margin="2,279,0,0" VerticalAlignment="Top" Width="180"/>
+                    <ListBox x:Name="categoryList" HorizontalAlignment="Left" Height="174" Margin="10,299,0,0" VerticalAlignment="Top" Width="162"/>
+                    <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="10,478,0,0" VerticalAlignment="Top" Width="75" Click="addCatBtnClicked"/>
+                    <Button x:Name="removeCategoryBtn" Content="Remove" HorizontalAlignment="Left" Margin="97,478,0,0" VerticalAlignment="Top" Width="75" Click="removeCatBtnClicked"/>
+                    <ListBox x:Name="selectedCategoryList" HorizontalAlignment="Left" Height="49" Margin="10,503,0,0" VerticalAlignment="Top" Width="162"/>
+                    <Button x:Name="searchBusinessesBtn" Content="Search Businesses" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,564,0,0" VerticalAlignment="Top" Width="162" Click="searchBusinessesClicked"/>
+                    <GroupBox Header="Search Results" HorizontalAlignment="Left" Height="241" Margin="187,0,0,0" VerticalAlignment="Top" Width="741">
+                        <DataGrid x:Name="searchResultsGrid" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="731" Margin="0,0,-2,0" SelectionChanged="resultsGrid_SelectionChanged" IsReadOnly="True"/>
+                    </GroupBox>
+                    <GroupBox Header="Selected Business" HorizontalAlignment="Left" Height="333" Margin="187,250,0,0" VerticalAlignment="Top" Width="741">
+                        <Grid x:Name="selectedBusinessGrid">
+                            <Label x:Name="selectedBusinessName" Content="name of business" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="202"/>
+                            <Button Content="Show Reviews" HorizontalAlignment="Left" Height="50" Margin="622,6,0,0" VerticalAlignment="Top" Width="97" Click="showReviewsBtnClicked"/>
+                            <TextBox x:Name="addReviewTextBox" HorizontalAlignment="Left" Height="52" Margin="10,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="458"/>
+                            <Label Content="Rating:" HorizontalAlignment="Left" Margin="473,111,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="addReviewRatingBox" HorizontalAlignment="Left" Margin="525,115,0,0" VerticalAlignment="Top" Width="40"/>
+                            <Button x:Name="addReviewBtn" Content="Add Review" HorizontalAlignment="Left" Margin="473,143,0,0" VerticalAlignment="Top" Width="92" Click="addReviewBtnClicked"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

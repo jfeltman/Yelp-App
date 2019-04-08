@@ -1,0 +1,10 @@
+Users - 192999
+Friends - 1052706
+Businesses - 11481
+Attributes - 227536
+Categories - 33619
+Hours - 55502
+Checkin - 481360
+Favoritebusiness - 0
+Reviews - 416479
+Writesfor - 416479

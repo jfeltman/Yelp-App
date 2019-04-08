@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamTeamwork_Yelp_App", "TeamTeamwork_Yelp_App\TeamTeamwork_Yelp_App.csproj", "{851B41E9-E223-4CCF-A5EA-E3868DF763EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{851B41E9-E223-4CCF-A5EA-E3868DF763EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851B41E9-E223-4CCF-A5EA-E3868DF763EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851B41E9-E223-4CCF-A5EA-E3868DF763EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851B41E9-E223-4CCF-A5EA-E3868DF763EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A63805D-B867-4853-B428-F25679B3968A}
+	EndGlobalSection
+EndGlobal
