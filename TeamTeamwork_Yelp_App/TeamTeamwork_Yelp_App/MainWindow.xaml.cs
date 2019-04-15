@@ -29,6 +29,7 @@ namespace TeamTeamwork_Yelp_App
 
         private BusinessSearch BS = new BusinessSearch();
         private AddReview AR = new AddReview();
+        private UserInformation UsI = new UserInformation();
 
         // Runs the application
         public void runApp()
@@ -121,6 +122,12 @@ namespace TeamTeamwork_Yelp_App
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
                 AR.addReview(addReviewTextBox, addReviewRatingBox, selectedBusiness.businessid);
             }
+        }
+
+        private void SearchNameButtonClick(object sender, RoutedEventArgs e)
+        {
+            userIdListbox.Items.Clear();
+            UsI.searchUser(EnterNameBox, userIdListbox);
         }
     }
 }

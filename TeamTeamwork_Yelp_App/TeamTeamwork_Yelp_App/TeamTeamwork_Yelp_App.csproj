@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AddReview.cs" />
+    <Compile Include="UserInformation.cs" />
     <Compile Include="ReviewsWindow.xaml.cs">
       <DependentUpon>ReviewsWindow.xaml</DependentUpon>
     </Compile>

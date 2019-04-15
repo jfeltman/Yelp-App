@@ -9,7 +9,43 @@
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="User Information">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Set Current User" HorizontalAlignment="Left" Height="126" Margin="10,10,0,0" VerticalAlignment="Top" Width="308">
+                        <Grid>
+                            <TextBox x:Name="EnterNameBox" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.167,0.152" HorizontalAlignment="Left" Width="181"/>
+                            <Button x:Name="SearchNamebutton" Content="Search" Margin="196,10,10,70" IsDefault="True" Click="SearchNameButtonClick"/>
+                            <ListBox x:Name="userIdListbox" Margin="10,38,10,10"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="User Information" HorizontalAlignment="Left" Height="303" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
+                        <Grid>
+                            <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="47"/>
+                            <TextBox x:Name="userInfoNameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="229" Margin="57,14,0,0"/>
+                            <Label Content="Stars:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="47"/>
+                            <Label Content="Fans:" HorizontalAlignment="Left" Margin="151,46,0,0" VerticalAlignment="Top" Width="47"/>
+                            <TextBox x:Name="userInfoStars" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="94" Margin="57,49,0,0"/>
+                            <TextBox x:Name="userInfoFans" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="94" Margin="192,49,0,0"/>
+                            <Label Content="Yelping &#xD;&#xA;Since:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
+                            <TextBox x:Name="yelpingSincebox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="224" Margin="62,88,0,0"/>
+                            <Label Content="Votes:" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
+                            <Label Content="Useful:" HorizontalAlignment="Left" Margin="202,124,0,0" VerticalAlignment="Top" Width="64" Height="42"/>
+                            <Label Content="Cool:" HorizontalAlignment="Left" Margin="132,124,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
+                            <Label Content="Funny:" HorizontalAlignment="Left" Margin="62,124,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
+                            <TextBox x:Name="funnyVotesbox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="48" Margin="62,152,0,0"/>
+                            <TextBox x:Name="coolVotesbox_Copy" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="48" Margin="132,152,0,0"/>
+                            <TextBox x:Name="usefulVotesbox_Copy1" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="48" Margin="202,152,0,0"/>
+                            <Label Content="Location:" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
+                            <Label Content="long:" HorizontalAlignment="Left" Margin="29,228,0,0" VerticalAlignment="Top" Width="38" Height="42"/>
+                            <Label Content="lat:" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" Width="28" Height="42"/>
+                            <TextBox x:Name="latitudeBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="121" Margin="68,204,0,0"/>
+                            <TextBox x:Name="longitudeBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="121" Margin="68,233,0,0"/>
+                            <Button x:Name="EditUsI" Content="Edit" HorizontalAlignment="Left" Margin="202,204,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="Button_Click"/>
+                            <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
+
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
             </TabItem>
             <TabItem Header="Business Search">
                 <Grid Background="#FFE5E5E5">
