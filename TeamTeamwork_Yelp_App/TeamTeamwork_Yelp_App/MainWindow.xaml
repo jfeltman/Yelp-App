@@ -41,7 +41,6 @@
                             <TextBox x:Name="longitudeBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="121" Margin="68,233,0,0"/>
                             <Button x:Name="EditUsI" Content="Edit" HorizontalAlignment="Left" Margin="202,204,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
                             <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
-
                         </Grid>
                     </GroupBox>
 
