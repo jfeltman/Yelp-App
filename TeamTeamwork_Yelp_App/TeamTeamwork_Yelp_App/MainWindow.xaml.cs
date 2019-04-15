@@ -122,5 +122,20 @@ namespace TeamTeamwork_Yelp_App
                 AR.addReview(addReviewTextBox, addReviewRatingBox, selectedBusiness.businessid);
             }
         }
+
+        private void checkInButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+
+        private void showCheckinsBtnClicked(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+
+        private void addToFavoritesBtnClicked(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
     }
 }

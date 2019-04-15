@@ -26,18 +26,63 @@
                     <Button x:Name="removeCategoryBtn" Content="Remove" HorizontalAlignment="Left" Margin="97,478,0,0" VerticalAlignment="Top" Width="75" Click="removeCatBtnClicked"/>
                     <ListBox x:Name="selectedCategoryList" HorizontalAlignment="Left" Height="49" Margin="10,503,0,0" VerticalAlignment="Top" Width="162"/>
                     <Button x:Name="searchBusinessesBtn" Content="Search Businesses" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,564,0,0" VerticalAlignment="Top" Width="162" Click="searchBusinessesClicked"/>
-                    <GroupBox Header="Search Results" HorizontalAlignment="Left" Height="241" Margin="187,0,0,0" VerticalAlignment="Top" Width="533">
-                        <DataGrid x:Name="searchResultsGrid" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="523" Margin="0,0,-2,0" SelectionChanged="resultsGrid_SelectionChanged" IsReadOnly="True"/>
+                    <GroupBox Header="Search Results" HorizontalAlignment="Left" Height="241" Margin="187,0,0,0" VerticalAlignment="Top" Width="500">
+                        <DataGrid x:Name="searchResultsGrid" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="490" Margin="0,0,-2,0" SelectionChanged="resultsGrid_SelectionChanged" IsReadOnly="True"/>
                     </GroupBox>
                     <GroupBox Header="Selected Business" HorizontalAlignment="Left" Height="333" Margin="187,250,0,0" VerticalAlignment="Top" Width="741">
                         <Grid x:Name="selectedBusinessGrid">
-                            <Label x:Name="selectedBusinessName" Content="name of business" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="202"/>
-                            <Button Content="Show Reviews" HorizontalAlignment="Left" Height="50" Margin="622,6,0,0" VerticalAlignment="Top" Width="97" Click="showReviewsBtnClicked"/>
-                            <TextBox x:Name="addReviewTextBox" HorizontalAlignment="Left" Height="52" Margin="10,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="458"/>
-                            <Label Content="Rating:" HorizontalAlignment="Left" Margin="473,111,0,0" VerticalAlignment="Top"/>
-                            <ComboBox x:Name="addReviewRatingBox" HorizontalAlignment="Left" Margin="525,115,0,0" VerticalAlignment="Top" Width="40"/>
-                            <Button x:Name="addReviewBtn" Content="Add Review" HorizontalAlignment="Left" Margin="473,143,0,0" VerticalAlignment="Top" Width="92" Click="addReviewBtnClicked"/>
+                            <Label x:Name="selectedBusinessName" Content="name of business" HorizontalAlignment="Left" VerticalAlignment="Top" Width="429" Background="LightSkyBlue" Height="30"/>
+                            <Button Content="Show Reviews" HorizontalAlignment="Left" Height="50" Margin="639,90,0,0" VerticalAlignment="Top" Width="90" Click="showReviewsBtnClicked"/>
+                            <TextBox x:Name="addReviewTextBox" HorizontalAlignment="Left" Height="52" Margin="0,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="429"/>
+                            <Label Content="Rating:" HorizontalAlignment="Left" Margin="434,149,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="addReviewRatingBox" HorizontalAlignment="Left" Margin="486,153,0,0" VerticalAlignment="Top" Width="40"/>
+                            <Button x:Name="addReviewBtn" Content="Add Review" HorizontalAlignment="Left" Margin="434,181,0,0" VerticalAlignment="Top" Width="92" Click="addReviewBtnClicked"/>
+                            <GroupBox Header="Friends who reviewed this business" HorizontalAlignment="Left" Height="112" Margin="0,199,0,0" VerticalAlignment="Top" Width="729">
+                                <DataGrid x:Name="selectedBusinessFriendReviewsGrid" HorizontalAlignment="Left" Height="93" Margin="0,0,-2,-3" VerticalAlignment="Top" Width="719"/>
+                            </GroupBox>
+                            <Label x:Name="selectedBusinessAddress" Content="address" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top" Width="429" Background="LightSkyBlue" Height="31"/>
+                            <ListBox x:Name="selectedBusinessCategoriesList" HorizontalAlignment="Left" Height="79" Margin="446,0,0,0" VerticalAlignment="Top" Width="134"/>
+                            <ListBox x:Name="selectedBusinessHoursList" HorizontalAlignment="Left" Height="79" Margin="585,0,0,0" VerticalAlignment="Top" Width="134"/>
+                            <Label x:Name="selectedBusinessAttributes" Content="Attributes" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="529" Height="54" Background="AliceBlue"/>
+                            <Button Content="Check In" HorizontalAlignment="Left" Margin="543,90,0,0" VerticalAlignment="Top" Width="91" Height="50" Click="checkInButton_Clicked"/>
+                            <Button Content="Add to Favorites" HorizontalAlignment="Left" Margin="639,149,-1,0" VerticalAlignment="Top" Width="91" Height="50" Click="addToFavoritesBtnClicked"/>
+                            <Button Content="Show Checkins" HorizontalAlignment="Left" Margin="543,150,0,0" VerticalAlignment="Top" Width="91" Height="50" Click="showCheckinsBtnClicked"/>
                         </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Price" HorizontalAlignment="Left" Height="38" Margin="690,0,0,0" VerticalAlignment="Top" Width="238">
+                        <Grid>
+                            <CheckBox x:Name="price1" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                            <CheckBox x:Name="price3" Content="$$$" HorizontalAlignment="Left" Margin="116,0,0,0" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="price2" Content="$$" HorizontalAlignment="Left" Margin="58,0,0,0" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="price4" Content="$$$$" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Attributes" HorizontalAlignment="Left" Height="168" Margin="690,38,0,0" VerticalAlignment="Top" Width="139">
+                        <Grid>
+                            <CheckBox x:Name="takesCreditCards" Content="Takes Credit Cards" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="takesReservations" Content="Takes Reservations" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0"/>
+                            <CheckBox x:Name="wheelchairAccess" Content="Wheelchair Access" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0"/>
+                            <CheckBox x:Name="outdoorSeating" Content="Outdoor Seating" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,44,0,0"/>
+                            <CheckBox x:Name="goodForKids" Content="Good for Kids" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0"/>
+                            <CheckBox x:Name="goodForGroups" Content="Good for groups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,74,0,0"/>
+                            <CheckBox x:Name="delivery" Content="Delivery" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,89,0,0"/>
+                            <CheckBox x:Name="takeOut" Content="Take Out" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,104,0,0"/>
+                            <CheckBox x:Name="freeWifi" Content="Free WiFi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,119,0,0"/>
+                            <CheckBox x:Name="bikeParking" Content="Bike Parking" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,134,0,-3"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Meal" HorizontalAlignment="Left" Height="168" Margin="834,38,0,0" VerticalAlignment="Top" Width="96">
+                        <Grid>
+                            <CheckBox x:Name="breakfast" Content="Breakfast" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="brunch" Content="Brunch" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                            <CheckBox x:Name="lunch" Content="Lunch" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0"/>
+                            <CheckBox x:Name="dinner" Content="Dinner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,60,0,0"/>
+                            <CheckBox x:Name="dessert" Content="Dessert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0"/>
+                            <CheckBox x:Name="lateNight" Content="Late Night" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,100,0,0"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Sort Results By" HorizontalAlignment="Left" Height="44" Margin="689,206,0,0" VerticalAlignment="Top" Width="239">
+                        <ComboBox x:Name="sortResultsComboBox" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="148"/>
                     </GroupBox>
                 </Grid>
             </TabItem>
