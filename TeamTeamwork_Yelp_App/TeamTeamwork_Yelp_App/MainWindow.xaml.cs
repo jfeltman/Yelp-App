@@ -128,6 +128,8 @@ namespace TeamTeamwork_Yelp_App
         {
             userIdListbox.Items.Clear();
             UsI.searchUser(EnterNameBox, userIdListbox);
+        }
+
         private void checkInButton_Clicked(object sender, RoutedEventArgs e)
         {
             // TODO
