@@ -33,6 +33,7 @@ namespace TeamTeamwork_Yelp_App
         // Runs the application
         public void runApp()
         {
+            numBusinessesLabel.Visibility = Visibility.Hidden;
             BS.addSearchResultColumns(searchResultsGrid);
             BS.addStates(stateList);
             AR.addRatings(addReviewRatingBox);
@@ -86,6 +87,7 @@ namespace TeamTeamwork_Yelp_App
             // remove all previous search results
             searchResultsGrid.Items.Clear();
             BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid);
+            numBusinessesLabel.Visibility = Visibility.Visible;
         }
 
         // User clicks on a business from the results
