@@ -37,6 +37,7 @@ namespace TeamTeamwork_Yelp_App
             numBusinessesLabel.Visibility = Visibility.Hidden;
             BS.addSearchResultColumns(searchResultsGrid);
             BS.addStates(stateList);
+            BS.addSortByValues(sortResultsComboBox);
             AR.addRatings(addReviewRatingBox);
             selectedBusinessGrid.Visibility = Visibility.Hidden;
         }
@@ -87,7 +88,10 @@ namespace TeamTeamwork_Yelp_App
         {
             // remove all previous search results
             searchResultsGrid.Items.Clear();
-            BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid);
+
+            List<CheckBox> checkBoxes = createCheckBoxList();
+
+            BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid, checkBoxes, sortResultsComboBox);
             numBusinessesLabel.Visibility = Visibility.Visible;
         }
 
@@ -149,6 +153,38 @@ namespace TeamTeamwork_Yelp_App
         private void UpdateUsI_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private List<CheckBox> createCheckBoxList()
+        {
+            List<CheckBox> checkBoxes = new List<CheckBox>();
+            // price range
+            checkBoxes.Add(price1);
+            checkBoxes.Add(price2);
+            checkBoxes.Add(price3);
+            checkBoxes.Add(price4);
+            
+            // attributes
+            checkBoxes.Add(takesCreditCards);
+            checkBoxes.Add(takesReservations);
+            checkBoxes.Add(wheelchairAccess);
+            checkBoxes.Add(outdoorSeating);
+            checkBoxes.Add(goodForKids);
+            checkBoxes.Add(goodForGroups);
+            checkBoxes.Add(delivery);
+            checkBoxes.Add(takeOut);
+            checkBoxes.Add(freeWifi);
+            checkBoxes.Add(bikeParking);
+
+            // meal
+            checkBoxes.Add(breakfast);
+            checkBoxes.Add(brunch);
+            checkBoxes.Add(lunch);
+            checkBoxes.Add(dinner);
+            checkBoxes.Add(dessert);
+            checkBoxes.Add(lateNight);
+
+            return checkBoxes;
         }
     }
 }

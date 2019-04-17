@@ -68,6 +68,15 @@ namespace TeamTeamwork_Yelp_App
             grid.Columns.Add(col9);
         }
 
+        public void addSortByValues(ComboBox sortByList)
+        {
+            sortByList.Items.Add("Name (Default");
+            sortByList.Items.Add("Highest Rating");
+            sortByList.Items.Add("Most Reviewed");
+            sortByList.Items.Add("Most Check-ins");
+            sortByList.Items.Add("Nearest");
+        }
+
         // Fill in the states box with all the distinct states from the database
         public void addStates(ComboBox stateList)
         {
@@ -174,7 +183,8 @@ namespace TeamTeamwork_Yelp_App
         }
 
         // Search for businesses based on zip code and/or categories selected
-        public void searchForBusiness(ListBox zipList, ListBox selectedCategoryList, DataGrid grid)
+        public void searchForBusiness(ListBox zipList, ListBox selectedCategoryList, DataGrid grid, 
+            List<CheckBox> attributes, ComboBox sortResults)
         {
             // if zip isnt selected, return
             if (zipList.SelectedItem == null)
@@ -182,34 +192,17 @@ namespace TeamTeamwork_Yelp_App
                 return;
             }
 
-            string cmdText;
-
-            // Search based off of just zip code only
-            if (selectedCategoryList.Items.IsEmpty == true)
+            string cmdText = "SELECT DISTINCT name, street, city, stateabbrev, zip, starrating, " + 
+                "reviewcount, checkincount, businessid FROM businesses " +
+                "WHERE zip = '" + zipList.SelectedItem.ToString() + "'";
+            
+            if (selectedCategoryList.Items.IsEmpty == false)
             {
-                cmdText = "SELECT DISTINCT name, street, city, stateabbrev, zip, starrating, " +
-                    "reviewcount, checkincount, businessid FROM businesses WHERE zip = '"
-                    + zipList.SelectedItem.ToString() + "'ORDER BY name;";
+                cmdText = createCategoriesQuery(cmdText, selectedCategoryList);
             }
-            else
-            {
-                // Search based off of zip code and selected categories
-                cmdText = "SELECT DISTINCT businesses.name, street, city, stateabbrev, zip, starrating, " +
-                    "reviewcount, checkincount, businesses.businessid FROM businesses, categories " +
-                    "WHERE businesses.businessid = categories.businessid AND " +
-                    "zip = '" + zipList.SelectedItem.ToString() + 
-                    "' AND (categories.name = '";
 
-                // append categories to query
-                foreach (var item in selectedCategoryList.Items)
-                {
-                    cmdText += item.ToString() + "' OR categories.name = '";
-                }
-
-                // remove last 'OR categories.name = '
-                cmdText = cmdText.Remove(cmdText.Length - 23);
-                cmdText += ") ORDER BY businesses.name;";
-            }
+            cmdText = createAttributesQuery(cmdText, attributes);
+            cmdText = addSorting(cmdText, sortResults);
 
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
@@ -241,6 +234,146 @@ namespace TeamTeamwork_Yelp_App
                 }
                 conn.Close();
             }
+        }
+
+        private string createCategoriesQuery(string cmdText, ListBox categoryList)
+        {
+            string catText = " AND businessid IN ";
+
+            foreach (var item in categoryList.Items)
+            {
+                catText += "(SELECT businessid FROM categories WHERE name = '" + item.ToString() + "') AND businessid IN ";
+            }
+
+            catText = catText.Remove(catText.Length - 19);
+
+            cmdText += catText;
+
+            return cmdText;
+        }
+
+        private string createAttributesQuery(string cmdText, List<CheckBox> attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                switch (attribute.Name)
+                {
+                    case "price1":
+                        cmdText += attributeText(attribute, "RestaurantsPriceRange2", "1");
+                        break;
+                    case "price2":
+                        cmdText += attributeText(attribute, "RestaurantsPriceRange2", "2");
+                        break;
+                    case "price3":
+                        cmdText += attributeText(attribute, "RestaurantsPriceRange2", "3");
+                        break;
+                    case "price4":
+                        cmdText += attributeText(attribute, "RestaurantsPriceRange2", "4");
+                        break;
+                    case "takesCreditCards":
+                        cmdText += attributeText(attribute, "BusinessAcceptsCreditCards", "true");
+                        break;
+                    case "takesReservations":
+                        cmdText += attributeText(attribute, "RestaurantsReservations", "true");
+                        break;
+                    case "wheelchairAccess":
+                        cmdText += attributeText(attribute, "WheelchairAccessible", "true");
+                        break;
+                    case "outdoorSeating":
+                        cmdText += attributeText(attribute, "OutdoorSeating", "true");
+                        break;
+                    case "goodForKids":
+                        cmdText += attributeText(attribute, "GoodForKids", "true");
+                        break;
+                    case "goodForGroups":
+                        cmdText += attributeText(attribute, "RestaurantsGoodForGroups", "true");
+                        break;
+                    case "delivery":
+                        cmdText += attributeText(attribute, "RestaurantsDelivery", "true");
+                        break;
+                    case "takeout":
+                        cmdText += attributeText(attribute, "RestaurantsTakeOut", "true");
+                        break;
+                    case "freeWifi":
+                        cmdText += attributeText(attribute, "WiFi", "free");
+                        break;
+                    case "bikeparking":
+                        cmdText += attributeText(attribute, "BikeParking", "true");
+                        break;
+                    case "breakfast":
+                        cmdText += attributeText(attribute, "breakfast", "true");
+                        break;
+                    case "brunch":
+                        cmdText += attributeText(attribute, "brunch", "true");
+                        break;
+                    case "lunch":
+                        cmdText += attributeText(attribute, "lunch", "true");
+                        break;
+                    case "dinner":
+                        cmdText += attributeText(attribute, "dinner", "true");
+                        break;
+                    case "dessert":
+                        cmdText += attributeText(attribute, "dessert", "true");
+                        break;
+                    case "latenight":
+                        cmdText += attributeText(attribute, "latenight", "true");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return cmdText;
+        }
+
+        private string attributeText(CheckBox attribute, string name, string value)
+        {
+            string text = "";
+
+            if (attribute.IsChecked == true)
+            {
+                text += "AND businessid IN (SELECT businessid FROM attributes WHERE name = '" + name + "' AND value = '" + value + "') ";
+
+                return text;
+            }
+            else
+            {
+                return text;
+            }
+        }
+
+        // TODO: ADD in current users lat and long to compute nearest sorting
+        private string addSorting(string cmdText, ComboBox sortList)
+        {
+            if (sortList.SelectedItem == null)
+            {
+                // no sort selected, default to name
+                cmdText += " ORDER BY name;";
+            } else
+            {
+                switch (sortList.SelectedItem.ToString())
+                {
+                    case "Name (Default":
+                        cmdText += " ORDER BY name;";
+                        break;
+                    case "Highest Rating":
+                        cmdText += " ORDER BY starrating DESC;";
+                        break;
+                    case "Most Reviewed":
+                        cmdText += " ORDER BY reviewcount DESC;";
+                        break;
+                    case "Most Check-ins":
+                        cmdText += " ORDER BY checkincount DESC;";
+                        break;
+                    case "Nearest":
+                        cmdText += " ORDER BY (POW((long - user.long), 2) + POW((lat - user.lat), 2));";
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return cmdText;
         }
     }
 }
