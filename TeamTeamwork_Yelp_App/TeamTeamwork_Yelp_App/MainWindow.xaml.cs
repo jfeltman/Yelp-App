@@ -144,7 +144,12 @@ namespace TeamTeamwork_Yelp_App
 
         private void showCheckinsBtnClicked(object sender, RoutedEventArgs e)
         {
-            // TODO
+            if (searchResultsGrid.SelectedItem != null)
+            {
+                Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
+                CheckinGraph graph = new CheckinGraph(selectedBusiness.businessid);
+                graph.Show();
+            }
         }
 
         private void addToFavoritesBtnClicked(object sender, RoutedEventArgs e)
