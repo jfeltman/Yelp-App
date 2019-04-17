@@ -99,7 +99,8 @@ namespace TeamTeamwork_Yelp_App
                 // show selected business info
                 selectedBusinessGrid.Visibility = Visibility.Visible;
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
-                selectedBusinessName.Content = selectedBusiness.name;
+                SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
+                SB.setBusinessInfo(selectedBusinessName, selectedBusinessAddress, selectedBusinessAttributes, selectedBusinessHoursList, selectedBusinessCategoriesList);
             }
         }
 
@@ -143,6 +144,11 @@ namespace TeamTeamwork_Yelp_App
         private void addToFavoritesBtnClicked(object sender, RoutedEventArgs e)
         {
             // TODO
+        }
+
+        private void UpdateUsI_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
