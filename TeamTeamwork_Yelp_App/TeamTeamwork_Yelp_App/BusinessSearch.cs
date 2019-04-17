@@ -77,6 +77,24 @@ namespace TeamTeamwork_Yelp_App
             sortByList.Items.Add("Nearest");
         }
 
+        public void addFriendReviewsColumns(DataGrid grid)
+        {
+            DataGridTextColumn col1 = new DataGridTextColumn();
+            col1.Header = "User Name";
+            col1.Binding = new Binding("userName");
+            grid.Columns.Add(col1);
+
+            DataGridTextColumn col2 = new DataGridTextColumn();
+            col2.Header = "Date";
+            col2.Binding = new Binding("date");
+            grid.Columns.Add(col2);
+
+            DataGridTextColumn col3 = new DataGridTextColumn();
+            col3.Header = "Text";
+            col3.Binding = new Binding("text");
+            grid.Columns.Add(col3);
+        }
+
         // Fill in the states box with all the distinct states from the database
         public void addStates(ComboBox stateList)
         {

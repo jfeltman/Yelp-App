@@ -38,6 +38,7 @@ namespace TeamTeamwork_Yelp_App
             BS.addSearchResultColumns(searchResultsGrid);
             BS.addStates(stateList);
             BS.addSortByValues(sortResultsComboBox);
+            BS.addFriendReviewsColumns(selectedBusinessFriendReviewsGrid);
             AR.addRatings(addReviewRatingBox);
             selectedBusinessGrid.Visibility = Visibility.Hidden;
         }
@@ -90,8 +91,9 @@ namespace TeamTeamwork_Yelp_App
             searchResultsGrid.Items.Clear();
 
             List<CheckBox> checkBoxes = createCheckBoxList();
-
             BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid, checkBoxes, sortResultsComboBox);
+
+            numBusinessesLabel.Content = "# of Businesses: " + searchResultsGrid.Items.Count;
             numBusinessesLabel.Visibility = Visibility.Visible;
         }
 
