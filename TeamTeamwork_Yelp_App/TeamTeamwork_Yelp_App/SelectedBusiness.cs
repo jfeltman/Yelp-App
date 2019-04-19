@@ -36,6 +36,32 @@ namespace TeamTeamwork_Yelp_App
             business = selectedBusiness;
         }
 
+        public void setFriendsReviews(String userID, DataGrid reviewGrid)
+        {
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT users.name, reviews.reviewdate, reviews.text FROM users, friends, businesses, writesfor, reviews WHERE businesses.businessid = writesfor.businessid AND writesfor.reviewid = reviews.reviewid AND friends.friendid = writesfor.userid AND friends.friendid = users.userid AND friends.userid = '" + userID + "' AND businesses.businessid = '" + business.businessid + "';";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            reviewGrid.Items.Add(new SelectedBusinessFriendReview()
+                            {
+                                userName = reader.GetString(0),
+                                date = reader.GetString(1),
+                                text = reader.GetString(2),
+                            });
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+
         public void setBusinessInfo(Label name, Label address, TextBox attributes, ListBox hours, ListBox categories)
         {
             // Set the easy stuff that we have stored in business (name and address)
@@ -147,6 +173,8 @@ namespace TeamTeamwork_Yelp_App
 
             return attr;
         }
+
+        
 
     }
 }

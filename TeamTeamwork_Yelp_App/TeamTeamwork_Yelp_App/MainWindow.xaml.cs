@@ -30,6 +30,7 @@ namespace TeamTeamwork_Yelp_App
         private BusinessSearch BS = new BusinessSearch();
         private AddReview AR = new AddReview();
         private UserInformation UsI = new UserInformation();
+        private String currentUser = "";
 
         // Runs the application
         public void runApp()
@@ -107,6 +108,7 @@ namespace TeamTeamwork_Yelp_App
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
                 SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
                 SB.setBusinessInfo(selectedBusinessName, selectedBusinessAddress, selectedBusinessAttributes, selectedBusinessHoursList, selectedBusinessCategoriesList);
+                SB.setFriendsReviews(currentUser, selectedBusinessFriendReviewsGrid);
             }
         }
 
@@ -192,6 +194,11 @@ namespace TeamTeamwork_Yelp_App
             checkBoxes.Add(lateNight);
 
             return checkBoxes;
+        }
+
+        private void userIdListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            currentUser = userIdListbox.SelectedItem.ToString();
         }
     }
 }

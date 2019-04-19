@@ -14,7 +14,7 @@
                         <Grid>
                             <TextBox x:Name="EnterNameBox" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.167,0.152" HorizontalAlignment="Left" Width="181"/>
                             <Button x:Name="SearchNamebutton" Content="Search" Margin="196,10,10,70" IsDefault="True" Click="SearchNameButtonClick"/>
-                            <ListBox x:Name="userIdListbox" Margin="10,38,10,10"/>
+                            <ListBox x:Name="userIdListbox" Margin="10,38,10,10" SelectionChanged="userIdListbox_SelectionChanged"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="User Information" HorizontalAlignment="Left" Height="282" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
