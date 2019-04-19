@@ -94,7 +94,7 @@ namespace TeamTeamwork_Yelp_App
             searchResultsGrid.Items.Clear();
 
             List<CheckBox> checkBoxes = createCheckBoxList();
-            BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid, checkBoxes, sortResultsComboBox);
+            BS.searchForBusiness(zipList, selectedCategoryList, searchResultsGrid, checkBoxes, sortResultsComboBox, currentUser);
 
             numBusinessesLabel.Content = "# of Businesses: " + searchResultsGrid.Items.Count;
             numBusinessesLabel.Visibility = Visibility.Visible;
@@ -200,7 +200,10 @@ namespace TeamTeamwork_Yelp_App
 
         private void userIdListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            currentUser = userIdListbox.SelectedItem.ToString();
+            if (userIdListbox.SelectedItem != null)
+            {
+                currentUser = userIdListbox.SelectedItem.ToString();
+            }
         }
     }
 }
