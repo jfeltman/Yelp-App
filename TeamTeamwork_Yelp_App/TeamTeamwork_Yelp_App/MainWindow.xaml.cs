@@ -110,7 +110,10 @@ namespace TeamTeamwork_Yelp_App
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
                 SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
                 SB.setBusinessInfo(selectedBusinessName, selectedBusinessAddress, selectedBusinessAttributes, selectedBusinessHoursList, selectedBusinessCategoriesList);
-                SB.setFriendsReviews(currentUser, selectedBusinessFriendReviewsGrid);
+                if (currentUser != null || currentUser != "")
+                {
+                    SB.setFriendsReviews(currentUser, selectedBusinessFriendReviewsGrid);
+                }
             }
         }
 
@@ -158,7 +161,13 @@ namespace TeamTeamwork_Yelp_App
 
         private void addToFavoritesBtnClicked(object sender, RoutedEventArgs e)
         {
-            // TODO
+            if (currentUser != null || currentUser != "")
+            {
+                Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
+                SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
+                SB.addFavorite(currentUser);
+            }
+
         }
 
         private void UpdateUsI_Click(object sender, RoutedEventArgs e)

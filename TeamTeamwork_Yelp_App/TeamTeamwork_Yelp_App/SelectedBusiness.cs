@@ -36,6 +36,22 @@ namespace TeamTeamwork_Yelp_App
             business = selectedBusiness;
         }
 
+        public void addFavorite(string userID)
+        {
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "INSERT INTO favoritebusiness(businessid, userid) SELECT '" + business.businessid + "', '" + userID + "' WHERE NOT EXISTS( SELECT 1 FROM favoritebusiness WHERE businessid = '" + business.businessid + "' AND userid = '" + userID + "');";
+                    //cmd.CommandText = "INSERT INTO public.favoritebusiness(businessid, userid) VALUES ('" + business.businessid + "', '" + userID + "');";
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+        }
+
         public void setFriendsReviews(string userID, DataGrid reviewGrid)
         {
             if (userID == null || userID == "")
