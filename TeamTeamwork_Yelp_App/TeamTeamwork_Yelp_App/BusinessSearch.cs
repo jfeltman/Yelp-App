@@ -202,7 +202,7 @@ namespace TeamTeamwork_Yelp_App
 
         // Search for businesses based on zip code and/or categories selected
         public void searchForBusiness(ListBox zipList, ListBox selectedCategoryList, DataGrid grid, 
-            List<CheckBox> attributes, ComboBox sortResults)
+            List<CheckBox> attributes, ComboBox sortResults, string userId)
         {
             // if zip isnt selected, return
             if (zipList.SelectedItem == null)
@@ -210,17 +210,38 @@ namespace TeamTeamwork_Yelp_App
                 return;
             }
 
-            string cmdText = "SELECT DISTINCT name, street, city, stateabbrev, zip, starrating, " + 
-                "reviewcount, checkincount, businessid FROM businesses " +
-                "WHERE zip = '" + zipList.SelectedItem.ToString() + "'";
-            
-            if (selectedCategoryList.Items.IsEmpty == false)
-            {
-                cmdText = createCategoriesQuery(cmdText, selectedCategoryList);
-            }
+            string cmdText;
 
-            cmdText = createAttributesQuery(cmdText, attributes);
-            cmdText = addSorting(cmdText, sortResults);
+            if (userId == null || userId == "")
+            {
+                // No current user
+                cmdText = "SELECT DISTINCT name, street, city, stateabbrev, zip, 0.0 as distance, starrating, " +
+                    "reviewcount, checkincount, businessid FROM businesses " +
+                    "WHERE zip = '" + zipList.SelectedItem.ToString() + "'";
+
+                if (selectedCategoryList.Items.IsEmpty == false)
+                {
+                    cmdText = createCategoriesQuery(cmdText, selectedCategoryList);
+                }
+
+                cmdText = createAttributesQuery(cmdText, attributes);
+                cmdText = addSorting(cmdText, sortResults);
+            } else
+            {
+                // There is a current user
+                cmdText = "SELECT DISTINCT businesses.name, street, city, stateabbrev, zip, " +
+                    "distance(businesses.lat, businesses.long, users.lat, users.long) as distance, " + // Call postgres distance func
+                    "starrating, businesses.reviewcount, checkincount, businessid FROM businesses, users " +
+                    "WHERE zip = '" + zipList.SelectedItem.ToString() + "' AND users.userid = '" + userId + "'";
+
+                if (selectedCategoryList.Items.IsEmpty == false)
+                {
+                    cmdText = createCategoriesQuery(cmdText, selectedCategoryList);
+                }
+
+                cmdText = createAttributesQuery(cmdText, attributes);
+                cmdText = addSorting(cmdText, sortResults);
+            }
 
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
@@ -234,6 +255,16 @@ namespace TeamTeamwork_Yelp_App
                     {
                         while (reader.Read())
                         {
+                            string d;
+                            if (reader.IsDBNull(5))
+                            {
+                                d = "0.0";
+                            }
+                            else
+                            {
+                                d = reader.GetDouble(5).ToString(); // do this in milestone3
+                            }
+
                             grid.Items.Add(new Business()
                             {
                                 name = reader.GetString(0),
@@ -241,11 +272,11 @@ namespace TeamTeamwork_Yelp_App
                                 city = reader.GetString(2),
                                 state = reader.GetString(3),
                                 zip = reader.GetInt32(4).ToString(),
-                                distance = "0", // do this in milestone3
-                                stars = reader.GetDouble(5).ToString(),
-                                reviewCount = reader.GetInt32(6).ToString(),
-                                checkinCount = reader.GetInt32(7).ToString(),
-                                businessid = reader.GetString(8)
+                                distance = d,
+                                stars = reader.GetDouble(6).ToString(),
+                                reviewCount = reader.GetInt32(7).ToString(),
+                                checkinCount = reader.GetInt32(8).ToString(),
+                                businessid = reader.GetString(9)
                             });
                         }
                     }
@@ -384,7 +415,7 @@ namespace TeamTeamwork_Yelp_App
                         cmdText += " ORDER BY checkincount DESC;";
                         break;
                     case "Nearest":
-                        cmdText += " ORDER BY (POW((long - user.long), 2) + POW((lat - user.lat), 2));";
+                        cmdText += " ORDER BY distance;";
                         break;
                     default:
                         break;
