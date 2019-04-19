@@ -17,7 +17,7 @@
                             <ListBox x:Name="userIdListbox" Margin="10,38,10,10"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="User Information" HorizontalAlignment="Left" Height="303" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
+                    <GroupBox Header="User Information" HorizontalAlignment="Left" Height="282" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
                         <Grid>
                             <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="47"/>
                             <TextBox x:Name="userInfoNameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="229" Margin="57,14,0,0"/>
@@ -43,10 +43,20 @@
                             <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="UpdateUsI_Click"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Favorite Businesses" HorizontalAlignment="Left" Height="132" Margin="10,449,0,0" VerticalAlignment="Top" Width="308">
+                    <GroupBox Header="Favorite Businesses" HorizontalAlignment="Left" Height="163" Margin="10,428,0,0" VerticalAlignment="Top" Width="579">
                         <Grid>
-                            <DataGrid HorizontalAlignment="Left" Width="298" Margin="0,0,-2,28.6"/>
-                            <Button x:Name="removeFavoriteBusinessBtn" Content="Remove from Favorites" HorizontalAlignment="Left" Margin="0,86,0,-0.4" VerticalAlignment="Top" Width="137" Height="24"/>
+                            <DataGrid HorizontalAlignment="Left" Width="566" Margin="0,0,0,-0.2"/>
+                            <Button x:Name="removeFavoriteBusinessBtn" Content="Remove selected Business from Favorites" HorizontalAlignment="Left" Margin="317,-45,0,0" VerticalAlignment="Top" Width="249" Height="24"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Friends" HorizontalAlignment="Left" Height="391" Margin="323,0,0,0" VerticalAlignment="Top" Width="266">
+                        <Grid>
+                            <DataGrid HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,-0.4"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="591" Margin="594,0,0,0" VerticalAlignment="Top" Width="344">
+                        <Grid>
+                            <DataGrid HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
                         </Grid>
                     </GroupBox>
 
