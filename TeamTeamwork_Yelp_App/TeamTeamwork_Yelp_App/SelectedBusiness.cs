@@ -36,8 +36,14 @@ namespace TeamTeamwork_Yelp_App
             business = selectedBusiness;
         }
 
-        public void setFriendsReviews(String userID, DataGrid reviewGrid)
+        public void setFriendsReviews(string userID, DataGrid reviewGrid)
         {
+            if (userID == null || userID == "")
+            {
+                return;
+            }
+            reviewGrid.Items.Clear();
+
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
                 conn.Open();
@@ -52,7 +58,7 @@ namespace TeamTeamwork_Yelp_App
                             reviewGrid.Items.Add(new SelectedBusinessFriendReview()
                             {
                                 userName = reader.GetString(0),
-                                date = reader.GetString(1),
+                                date = reader.GetDate(1).ToString(),
                                 text = reader.GetString(2),
                             });
                         }

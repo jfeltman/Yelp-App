@@ -30,7 +30,7 @@ namespace TeamTeamwork_Yelp_App
         private BusinessSearch BS = new BusinessSearch();
         private AddReview AR = new AddReview();
         private UserInformation UsI = new UserInformation();
-        private String currentUser = "";
+        private string currentUser = "";
 
         // Runs the application
         public void runApp()
