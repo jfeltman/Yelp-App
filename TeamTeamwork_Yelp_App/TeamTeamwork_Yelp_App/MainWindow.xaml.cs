@@ -30,6 +30,7 @@ namespace TeamTeamwork_Yelp_App
         private BusinessSearch BS = new BusinessSearch();
         private AddReview AR = new AddReview();
         private UserInformation UsI = new UserInformation();
+        private UserFriends UF = new UserFriends();
         private string currentUser = "";
 
         // Runs the application
@@ -40,6 +41,7 @@ namespace TeamTeamwork_Yelp_App
             BS.addStates(stateList);
             BS.addSortByValues(sortResultsComboBox);
             BS.addFriendReviewsColumns(selectedBusinessFriendReviewsGrid);
+            UsI.addFriendColumns(usersFriendsGrid);
             AR.addRatings(addReviewRatingBox);
             selectedBusinessGrid.Visibility = Visibility.Hidden;
         }

@@ -50,14 +50,10 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Friends" HorizontalAlignment="Left" Height="391" Margin="323,0,0,0" VerticalAlignment="Top" Width="266">
-                        <Grid>
-                            <DataGrid HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,-0.4"/>
-                        </Grid>
+                        <DataGrid x:Name="usersFriendsGrid" HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,-0.4"/>
                     </GroupBox>
                     <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="591" Margin="594,0,0,0" VerticalAlignment="Top" Width="344">
-                        <Grid>
-                            <DataGrid HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
-                        </Grid>
+                        <DataGrid HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
                     </GroupBox>
 
                 </Grid>
