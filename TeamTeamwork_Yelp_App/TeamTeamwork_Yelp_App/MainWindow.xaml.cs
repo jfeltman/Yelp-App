@@ -137,12 +137,18 @@ namespace TeamTeamwork_Yelp_App
 
         private void showCheckinsBtnClicked(object sender, RoutedEventArgs e)
         {
-            // TODO
+            // TODO5
         }
 
         private void addToFavoritesBtnClicked(object sender, RoutedEventArgs e)
         {
             // TODO
+        }
+
+        private void EditUsI_Click(object sender, RoutedEventArgs e)
+        {
+            latitudeBox.IsEnabled = true;
+            longitudeBox.IsEnabled = true;
         }
     }
 }
