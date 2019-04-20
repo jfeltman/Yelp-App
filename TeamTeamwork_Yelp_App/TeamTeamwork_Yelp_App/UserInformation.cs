@@ -10,7 +10,7 @@ using Npgsql;
 
 namespace TeamTeamwork_Yelp_App
 {
-    public class UserFriends
+    public class UserFriend
     {
         public string userid { get; set; }
         public string friendid { get; set; }
@@ -201,6 +201,38 @@ namespace TeamTeamwork_Yelp_App
                                 busZip = reader.GetInt32(3).ToString(),
                                 busAddress = reader.GetString(4),
                                 businessid = reader.GetString(5),
+                            });
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        public void setFriends(string userID, DataGrid usersFriendsGrid)
+        {
+            if (userID == null || userID == "")
+            {
+                return;
+            }
+            usersFriendsGrid.Items.Clear();
+
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "select users.name, users.averagestars, users.yelpingsince from users, friends where friends.friendid = users.userid and friends.userid = '" + userID + "'; ";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usersFriendsGrid.Items.Add(new UserFriend()
+                            {
+                                friendName = reader.GetString(0),
+                                friendStars = reader.GetDouble(1).ToString(),
+                                friendYelpingSince = reader.GetDate(2).ToString(),
                             });
                         }
                     }

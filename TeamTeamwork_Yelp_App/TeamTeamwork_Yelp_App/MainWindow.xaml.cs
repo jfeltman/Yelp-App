@@ -30,8 +30,6 @@ namespace TeamTeamwork_Yelp_App
         private BusinessSearch BS = new BusinessSearch();
         private AddReview AR = new AddReview();
         private UserInformation UsI = new UserInformation();
-        private UserFriends UF = new UserFriends();
-        private UserFavBusiness FB = new UserFavBusiness();
         private string currentUser = "";
 
         // Runs the application
@@ -233,6 +231,7 @@ namespace TeamTeamwork_Yelp_App
                 currentUser = userIdListbox.SelectedItem.ToString();
                 UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox, latitudeBox, longitudeBox);
                 UsI.setFavoriteBusinesses(currentUser, usersBusinessGrid);
+                UsI.setFriends(currentUser, usersFriendsGrid);
             }
         }
 
