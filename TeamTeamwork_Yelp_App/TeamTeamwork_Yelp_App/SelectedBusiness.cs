@@ -50,7 +50,7 @@ namespace TeamTeamwork_Yelp_App
                 }
                 conn.Close();
             }
-            MessageBox.Show(business.name + "is a favorite!", "Yelp");
+            MessageBox.Show(business.name + " is a favorite!", "Yelp");
         }
 
         public void setFriendsReviews(string userID, DataGrid reviewGrid)

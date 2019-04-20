@@ -20,6 +20,18 @@ namespace TeamTeamwork_Yelp_App
         public string friendYelpingSince { get; set; }
     }
 
+    public class UserFavBusiness
+    {
+        public string userid { get; set; }
+        public string businessid { get; set; }
+
+        public string busName { get; set; }
+        public string busStars { get; set; }
+        public string busCity { get; set; }
+        public string busZip { get; set; }
+        public string busAddress { get; set; }
+    }
+
     class UserInformation
     {
         private string buildConnString()
@@ -126,6 +138,90 @@ namespace TeamTeamwork_Yelp_App
             col3.Header = "Yelping Since";
             col3.Binding = new Binding("friendYelpingSince");
             grid.Columns.Add(col3);
+        }
+
+        public void addBusinessColumns(DataGrid grid)
+        {
+            DataGridTextColumn col1 = new DataGridTextColumn();
+            col1.Header = "Business";
+            col1.Binding = new Binding("busName");
+            grid.Columns.Add(col1);
+
+            DataGridTextColumn col2 = new DataGridTextColumn();
+            col2.Header = "Stars";
+            col2.Binding = new Binding("busStars");
+            grid.Columns.Add(col2);
+
+            DataGridTextColumn col3 = new DataGridTextColumn();
+            col3.Header = "City";
+            col3.Binding = new Binding("busCity");
+            grid.Columns.Add(col3);
+
+            DataGridTextColumn col4 = new DataGridTextColumn();
+            col4.Header = "Zip";
+            col4.Binding = new Binding("busZip");
+            grid.Columns.Add(col4);
+
+            DataGridTextColumn col5 = new DataGridTextColumn();
+            col5.Header = "Address";
+            col5.Binding = new Binding("busAddress");
+            grid.Columns.Add(col5);
+
+            DataGridTextColumn col6 = new DataGridTextColumn();
+            col6.Header = "BID...";
+            col6.Binding = new Binding("businessid");
+            col6.Width = 40;
+            grid.Columns.Add(col6);
+        }
+
+        public void setFavoriteBusinesses(string userID, DataGrid usersBusinessGrid)
+        {
+            if (userID == null || userID == "")
+            {
+                return;
+            }
+            usersBusinessGrid.Items.Clear();
+
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "select businesses.name, businesses.starrating, businesses.city, businesses.zip, businesses.street, businesses.businessid from favoritebusiness, businesses where businesses.businessid = favoritebusiness.businessid and userid = '" + userID + "';";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usersBusinessGrid.Items.Add(new UserFavBusiness()
+                            {
+                                busName = reader.GetString(0),
+                                busStars = reader.GetDouble(1).ToString(),
+                                busCity = reader.GetString(2),
+                                busZip = reader.GetInt32(3).ToString(),
+                                busAddress = reader.GetString(4),
+                                businessid = reader.GetString(5),
+                            });
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        public void removeFavorite(string userID, string bid)
+        {
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "delete from favoritebusiness where businessid = '" + bid + "' and userid = '" + userID + "';";
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
         }
     }
 }

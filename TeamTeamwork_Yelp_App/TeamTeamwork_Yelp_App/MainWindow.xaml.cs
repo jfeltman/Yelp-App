@@ -31,6 +31,7 @@ namespace TeamTeamwork_Yelp_App
         private AddReview AR = new AddReview();
         private UserInformation UsI = new UserInformation();
         private UserFriends UF = new UserFriends();
+        private UserFavBusiness FB = new UserFavBusiness();
         private string currentUser = "";
 
         // Runs the application
@@ -42,6 +43,7 @@ namespace TeamTeamwork_Yelp_App
             BS.addSortByValues(sortResultsComboBox);
             BS.addFriendReviewsColumns(selectedBusinessFriendReviewsGrid);
             UsI.addFriendColumns(usersFriendsGrid);
+            UsI.addBusinessColumns(usersBusinessGrid);
             AR.addRatings(addReviewRatingBox);
             selectedBusinessGrid.Visibility = Visibility.Hidden;
         }
@@ -115,6 +117,17 @@ namespace TeamTeamwork_Yelp_App
                     SB.setFriendsReviews(currentUser, selectedBusinessFriendReviewsGrid);
                 }
             }
+        }
+
+        private void removeFromFavoritesBtnClicked(object sender, RoutedEventArgs e)
+        {
+            if (currentUser != null || currentUser != "" && usersBusinessGrid.SelectedItem != null)
+            {
+                UserFavBusiness selected = (UserFavBusiness)usersBusinessGrid.SelectedItem;
+                UsI.removeFavorite(currentUser, selected.businessid);
+                UsI.setFavoriteBusinesses(currentUser, usersBusinessGrid);
+            }
+
         }
 
         // Show the reviews for a specifc business
@@ -214,6 +227,7 @@ namespace TeamTeamwork_Yelp_App
             {
                 currentUser = userIdListbox.SelectedItem.ToString();
                 UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox, latitudeBox, longitudeBox);
+                UsI.setFavoriteBusinesses(currentUser, usersBusinessGrid);
             }
         }
 
