@@ -159,7 +159,12 @@ namespace TeamTeamwork_Yelp_App
 
         private void checkInButton_Clicked(object sender, RoutedEventArgs e)
         {
-            // TODO
+            if (searchResultsGrid.SelectedItem != null)
+            {
+                Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
+                SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
+                SB.checkin();
+            }
         }
 
         private void showCheckinsBtnClicked(object sender, RoutedEventArgs e)

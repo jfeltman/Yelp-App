@@ -197,7 +197,23 @@ namespace TeamTeamwork_Yelp_App
             return attr;
         }
 
-        
+        public void checkin()
+        {
+            string currDay = DateTime.Now.DayOfWeek.ToString();
+            string currMilTime = DateTime.Now.ToString("HH") + ":00:00";
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText =  "INSERT INTO checkin (businessid, checkinday, checkintime, checkincount) VALUES ('" + business.businessid + "', '" + currDay + "', '" + currMilTime + "', 1) ON CONFLICT (businessid, checkinday, checkintime) DO UPDATE SET checkincount = checkin.checkincount + 1;";
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+            MessageBox.Show("Checked into " + business.name + "!", "Yelp");
+        }
 
     }
 }
