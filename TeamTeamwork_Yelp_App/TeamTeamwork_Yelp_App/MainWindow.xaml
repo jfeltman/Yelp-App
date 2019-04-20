@@ -14,10 +14,10 @@
                         <Grid>
                             <TextBox x:Name="EnterNameBox" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.167,0.152" HorizontalAlignment="Left" Width="181"/>
                             <Button x:Name="SearchNamebutton" Content="Search" Margin="196,10,10,70" IsDefault="True" Click="SearchNameButtonClick"/>
-                            <ListBox x:Name="userIdListbox" Margin="10,38,10,10"/>
+                            <ListBox x:Name="userIdListbox" Margin="10,38,10,10" SelectionChanged="userIdListbox_SelectionChanged"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="User Information" HorizontalAlignment="Left" Height="303" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
+                    <GroupBox Header="User Information" HorizontalAlignment="Left" Height="282" Margin="10,141,0,0" VerticalAlignment="Top" Width="308">
                         <Grid>
                             <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="47"/>
                             <TextBox x:Name="userInfoNameBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="229" Margin="57,14,0,0" IsEnabled="False"/>
@@ -42,7 +42,19 @@
                             <Button x:Name="EditUsI" Content="Edit" HorizontalAlignment="Left" Margin="202,204,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="EditUsI_Click"/>
                             <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
 
+                            </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Favorite Businesses" HorizontalAlignment="Left" Height="163" Margin="10,428,0,0" VerticalAlignment="Top" Width="579">
+                        <Grid>
+                            <DataGrid HorizontalAlignment="Left" Width="566" Margin="0,0,0,-0.2"/>
+                            <Button x:Name="removeFavoriteBusinessBtn" Content="Remove selected Business from Favorites" HorizontalAlignment="Left" Margin="317,-45,0,0" VerticalAlignment="Top" Width="249" Height="24"/>
                         </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Friends" HorizontalAlignment="Left" Height="391" Margin="323,0,0,0" VerticalAlignment="Top" Width="266">
+                        <DataGrid x:Name="usersFriendsGrid" HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,-0.4"/>
+                    </GroupBox>
+                    <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="591" Margin="594,0,0,0" VerticalAlignment="Top" Width="344">
+                        <DataGrid HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
                     </GroupBox>
 
                 </Grid>
@@ -67,19 +79,19 @@
                     </GroupBox>
                     <GroupBox Header="Selected Business" HorizontalAlignment="Left" Height="333" Margin="187,250,0,0" VerticalAlignment="Top" Width="741">
                         <Grid x:Name="selectedBusinessGrid">
-                            <Label x:Name="selectedBusinessName" Content="name of business" HorizontalAlignment="Left" VerticalAlignment="Top" Width="429" Background="LightSkyBlue" Height="30"/>
+                            <Label x:Name="selectedBusinessName" Content="name of business" HorizontalAlignment="Left" VerticalAlignment="Top" Width="413" Background="LightSkyBlue" Height="30"/>
                             <Button Content="Show Reviews" HorizontalAlignment="Left" Height="50" Margin="639,90,0,0" VerticalAlignment="Top" Width="90" Click="showReviewsBtnClicked"/>
-                            <TextBox x:Name="addReviewTextBox" HorizontalAlignment="Left" Height="52" Margin="0,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="429"/>
+                            <TextBox x:Name="addReviewTextBox" HorizontalAlignment="Left" Height="52" Margin="0,149,0,0" TextWrapping="Wrap" Text="Add review...." VerticalAlignment="Top" Width="429"/>
                             <Label Content="Rating:" HorizontalAlignment="Left" Margin="434,149,0,0" VerticalAlignment="Top"/>
                             <ComboBox x:Name="addReviewRatingBox" HorizontalAlignment="Left" Margin="486,153,0,0" VerticalAlignment="Top" Width="40"/>
                             <Button x:Name="addReviewBtn" Content="Add Review" HorizontalAlignment="Left" Margin="434,181,0,0" VerticalAlignment="Top" Width="92" Click="addReviewBtnClicked"/>
                             <GroupBox Header="Friends who reviewed this business" HorizontalAlignment="Left" Height="112" Margin="0,199,0,0" VerticalAlignment="Top" Width="729">
                                 <DataGrid x:Name="selectedBusinessFriendReviewsGrid" HorizontalAlignment="Left" Height="93" Margin="0,0,-2,-3" VerticalAlignment="Top" Width="719"/>
                             </GroupBox>
-                            <Label x:Name="selectedBusinessAddress" Content="address" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top" Width="429" Background="LightSkyBlue" Height="31"/>
-                            <ListBox x:Name="selectedBusinessCategoriesList" HorizontalAlignment="Left" Height="79" Margin="446,0,0,0" VerticalAlignment="Top" Width="134"/>
-                            <ListBox x:Name="selectedBusinessHoursList" HorizontalAlignment="Left" Height="79" Margin="585,0,0,0" VerticalAlignment="Top" Width="134"/>
-                            <Label x:Name="selectedBusinessAttributes" Content="Attributes" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="529" Height="54" Background="AliceBlue"/>
+                            <Label x:Name="selectedBusinessAddress" Content="address" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top" Width="413" Background="LightSkyBlue" Height="31"/>
+                            <ListBox x:Name="selectedBusinessCategoriesList" HorizontalAlignment="Left" Height="79" Margin="418,0,0,0" VerticalAlignment="Top" Width="149" Background="AliceBlue"/>
+                            <ListBox x:Name="selectedBusinessHoursList" HorizontalAlignment="Left" Height="79" Margin="572,0,0,0" VerticalAlignment="Top" Width="147" Background="AliceBlue"/>
+                            <TextBox x:Name="selectedBusinessAttributes" Text="Attributes" HorizontalAlignment="Left" Margin="0,84,0,0" VerticalAlignment="Top" Width="529" Height="60" Background="AliceBlue" TextWrapping="WrapWithOverflow" FontSize="11" IsReadOnly="True"/>
                             <Button Content="Check In" HorizontalAlignment="Left" Margin="543,90,0,0" VerticalAlignment="Top" Width="91" Height="50" Click="checkInButton_Clicked"/>
                             <Button Content="Add to Favorites" HorizontalAlignment="Left" Margin="639,149,-1,0" VerticalAlignment="Top" Width="91" Height="50" Click="addToFavoritesBtnClicked"/>
                             <Button Content="Show Checkins" HorizontalAlignment="Left" Margin="543,150,0,0" VerticalAlignment="Top" Width="91" Height="50" Click="showCheckinsBtnClicked"/>
