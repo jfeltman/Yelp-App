@@ -49,6 +49,35 @@ namespace TeamTeamwork_Yelp_App
             }
         }
 
+        public void populateUserInfo(string userId, TextBox name, TextBox stars, TextBox fans, TextBox yps, TextBox funny, TextBox cool, TextBox useful)
+        {
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT users.name, users.averagestars, users.fanscount, users.yelpingsince,users.votesfunny, users.votescool, users.votesuseful FROM users WHERE users.userid = '" + userId + "'; ";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            name.Text = reader.GetString(0);
+                            stars.Text = reader.GetDouble(1).ToString();
+                            fans.Text = reader.GetInt16(2).ToString();
+                            yps.Text = reader.GetDate(3).ToString();
+                            funny.Text = reader.GetInt16(4).ToString();
+                            cool.Text = reader.GetInt16(5).ToString();
+                            useful.Text = reader.GetInt16(6).ToString();
+                            
+                        }
+                    }
+                }
+                conn.Close();
+        }
+    }
+
         public void addFriendColumns(DataGrid grid)
         {
             DataGridTextColumn col1 = new DataGridTextColumn();

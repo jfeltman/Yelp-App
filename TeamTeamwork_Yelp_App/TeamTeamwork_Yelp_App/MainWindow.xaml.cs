@@ -213,6 +213,7 @@ namespace TeamTeamwork_Yelp_App
             if (userIdListbox.SelectedItem != null)
             {
                 currentUser = userIdListbox.SelectedItem.ToString();
+                UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox);
             }
         }
 

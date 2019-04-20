@@ -32,8 +32,8 @@
                             <Label Content="Cool:" HorizontalAlignment="Left" Margin="132,124,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
                             <Label Content="Funny:" HorizontalAlignment="Left" Margin="62,124,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
                             <TextBox x:Name="funnyVotesbox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Margin="62,152,0,0" IsEnabled="False"/>
-                            <TextBox x:Name="coolVotesbox_Copy" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Margin="132,152,0,0" IsEnabled="False"/>
-                            <TextBox x:Name="usefulVotesbox_Copy1" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Margin="202,152,0,0" IsEnabled="False"/>
+                            <TextBox x:Name="coolVotesbox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Margin="132,152,0,0" IsEnabled="False"/>
+                            <TextBox x:Name="usefulVotesbox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Margin="202,152,0,0" IsEnabled="False"/>
                             <Label Content="Location:" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top" Width="65" Height="42"/>
                             <Label Content="long:" HorizontalAlignment="Left" Margin="29,228,0,0" VerticalAlignment="Top" Width="38" Height="42"/>
                             <Label Content="lat:" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" Width="28" Height="42"/>
