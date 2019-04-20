@@ -213,7 +213,7 @@ namespace TeamTeamwork_Yelp_App
             if (userIdListbox.SelectedItem != null)
             {
                 currentUser = userIdListbox.SelectedItem.ToString();
-                UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox);
+                UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox, latitudeBox, longitudeBox);
             }
         }
 
@@ -221,6 +221,13 @@ namespace TeamTeamwork_Yelp_App
         {
             latitudeBox.IsEnabled = true;
             longitudeBox.IsEnabled = true;
+        }
+
+        private void updateLoc_Clicked(object sender, RoutedEventArgs e)
+        {
+            UsI.updateLocation(currentUser, Convert.ToDouble(latitudeBox.Text), Convert.ToDouble(longitudeBox.Text));
+            latitudeBox.IsEnabled = false;
+            longitudeBox.IsEnabled = false;
         }
     }
 }

@@ -49,7 +49,7 @@ namespace TeamTeamwork_Yelp_App
             }
         }
 
-        public void populateUserInfo(string userId, TextBox name, TextBox stars, TextBox fans, TextBox yps, TextBox funny, TextBox cool, TextBox useful)
+        public void populateUserInfo(string userId, TextBox name, TextBox stars, TextBox fans, TextBox yps, TextBox funny, TextBox cool, TextBox useful, TextBox latitude, TextBox longitude)
         {
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
@@ -57,7 +57,7 @@ namespace TeamTeamwork_Yelp_App
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT users.name, users.averagestars, users.fanscount, users.yelpingsince,users.votesfunny, users.votescool, users.votesuseful FROM users WHERE users.userid = '" + userId + "'; ";
+                    cmd.CommandText = "SELECT users.name, users.averagestars, users.fanscount, users.yelpingsince,users.votesfunny, users.votescool, users.votesuseful, users.lat, users.long FROM users WHERE users.userid = '" + userId + "'; ";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -70,13 +70,45 @@ namespace TeamTeamwork_Yelp_App
                             funny.Text = reader.GetInt16(4).ToString();
                             cool.Text = reader.GetInt16(5).ToString();
                             useful.Text = reader.GetInt16(6).ToString();
-                            
+
+                            if (reader.IsDBNull(7) == false)
+                            {
+                                latitude.Text = reader.GetDouble(7).ToString();
+                            }
+                            else
+                            {
+                                latitude.Text = "";
+                            }
+                            if (reader.IsDBNull(8) == false)
+                            {
+                                longitude.Text = reader.GetDouble(8).ToString();
+                            }
+                            else
+                            {
+                                longitude.Text = "";
+                            }
+
                         }
                     }
                 }
                 conn.Close();
         }
     }
+
+        public void updateLocation(string userId, double latitude, double longitude)
+        {
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE users SET lat = " + latitude + ", long = " + longitude + " WHERE users.userid = '" + userId + "'; ";
+                    cmd.ExecuteReader();
+                }
+                conn.Close();
+            }
+        }
 
         public void addFriendColumns(DataGrid grid)
         {

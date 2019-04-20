@@ -40,9 +40,9 @@
                             <TextBox x:Name="latitudeBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Margin="68,204,0,0" IsEnabled="False"/>
                             <TextBox x:Name="longitudeBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Margin="68,233,0,0" IsEnabled="False"/>
                             <Button x:Name="EditUsI" Content="Edit" HorizontalAlignment="Left" Margin="202,204,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="EditUsI_Click"/>
-                            <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
+                            <Button x:Name="UpdateUsI" Content="Update" HorizontalAlignment="Left" Margin="202,233,0,2" Width="75" Click="updateLoc_Clicked"/>
 
-                            </Grid>
+                        </Grid>
                     </GroupBox>
                     <GroupBox Header="Favorite Businesses" HorizontalAlignment="Left" Height="163" Margin="10,428,0,0" VerticalAlignment="Top" Width="579">
                         <Grid>
