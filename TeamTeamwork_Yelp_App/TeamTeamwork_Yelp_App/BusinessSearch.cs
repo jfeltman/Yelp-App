@@ -70,7 +70,7 @@ namespace TeamTeamwork_Yelp_App
 
         public void addSortByValues(ComboBox sortByList)
         {
-            sortByList.Items.Add("Name (Default");
+            sortByList.Items.Add("Name (Default)");
             sortByList.Items.Add("Highest Rating");
             sortByList.Items.Add("Most Reviewed");
             sortByList.Items.Add("Most Check-ins");

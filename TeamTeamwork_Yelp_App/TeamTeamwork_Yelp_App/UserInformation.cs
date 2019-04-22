@@ -192,7 +192,7 @@ namespace TeamTeamwork_Yelp_App
         public void addreviewingColumns(DataGrid grid)
         {
             DataGridTextColumn col1 = new DataGridTextColumn();
-            col1.Header = "User Name";
+            col1.Header = "Name";
             col1.Binding = new Binding("friendRName");
             grid.Columns.Add(col1);
 
