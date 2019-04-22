@@ -42,6 +42,7 @@ namespace TeamTeamwork_Yelp_App
             BS.addFriendReviewsColumns(selectedBusinessFriendReviewsGrid);
             UsI.addFriendColumns(usersFriendsGrid);
             UsI.addBusinessColumns(usersBusinessGrid);
+            UsI.addreviewingColumns(friendReviewsGrid);
             AR.addRatings(addReviewRatingBox);
             selectedBusinessGrid.Visibility = Visibility.Hidden;
         }
@@ -232,6 +233,7 @@ namespace TeamTeamwork_Yelp_App
                 UsI.populateUserInfo(currentUser, userInfoNameBox, userInfoStars, userInfoFans, yelpingSincebox, funnyVotesbox, coolVotesbox, usefulVotesbox, latitudeBox, longitudeBox);
                 UsI.setFavoriteBusinesses(currentUser, usersBusinessGrid);
                 UsI.setFriends(currentUser, usersFriendsGrid);
+                UsI.setfriendsreviews(currentUser, friendReviewsGrid);
             }
         }
 

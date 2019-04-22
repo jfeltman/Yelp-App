@@ -20,6 +20,17 @@ namespace TeamTeamwork_Yelp_App
         public string friendYelpingSince { get; set; }
     }
 
+    public class friendReview
+    {
+        public string userid { get; set; }
+        public string friendid { get; set; }
+
+        public string friendRName { get; set; }
+        public string reviewBusiness { get; set; }
+        public string reviewBusinessCity { get; set; }
+        public string reviewText { get; set; }
+    }
+
     public class UserFavBusiness
     {
         public string userid { get; set; }
@@ -174,6 +185,29 @@ namespace TeamTeamwork_Yelp_App
             grid.Columns.Add(col6);
         }
 
+        public void addreviewingColumns(DataGrid grid)
+        {
+            DataGridTextColumn col1 = new DataGridTextColumn();
+            col1.Header = "User Name";
+            col1.Binding = new Binding("friendRName");
+            grid.Columns.Add(col1);
+
+            DataGridTextColumn col2 = new DataGridTextColumn();
+            col2.Header = "Business";
+            col2.Binding = new Binding("reviewBusiness");
+            grid.Columns.Add(col2);
+
+            DataGridTextColumn col3 = new DataGridTextColumn();
+            col3.Header = "City";
+            col3.Binding = new Binding("reviewBusinessCity");
+            grid.Columns.Add(col3);
+
+            DataGridTextColumn col4 = new DataGridTextColumn();
+            col4.Header = "Text";
+            col4.Binding = new Binding("reviewText");
+            grid.Columns.Add(col4);
+        }
+
         public void setFavoriteBusinesses(string userID, DataGrid usersBusinessGrid)
         {
             if (userID == null || userID == "")
@@ -188,7 +222,7 @@ namespace TeamTeamwork_Yelp_App
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "select businesses.name, businesses.starrating, businesses.city, businesses.zip, businesses.street, businesses.businessid from favoritebusiness, businesses where businesses.businessid = favoritebusiness.businessid and userid = '" + userID + "';";
+                    cmd.CommandText = "select businesses.name, businesses.starrating, businesses.city, businesses.zip, businesses.street, businesses.businessid from favoritebusiness, businesses where businesses.businessid = favoritebusiness.businessid and favoritebusiness.userid = '" + userID + "';";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -233,6 +267,39 @@ namespace TeamTeamwork_Yelp_App
                                 friendName = reader.GetString(0),
                                 friendStars = reader.GetDouble(1).ToString(),
                                 friendYelpingSince = reader.GetDate(2).ToString(),
+                            });
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        public void setfriendsreviews(string userID, DataGrid friendReviewsGrid)
+        {
+            if (userID == null || userID == "")
+            {
+                return;
+            }
+            friendReviewsGrid.Items.Clear();
+            using (var conn = new NpgsqlConnection(buildConnString()))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "select users.name, businesses.name, businesses.city, reviews.text from users, friends, writesfor, reviews, businesses WHERE friends.userid = '" + userID + "' and friends.friendid = users.userid and friends.friendid = writesfor.userid and writesfor.reviewid = reviews.reviewid and writesfor.businessid = businesses.businessid;";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            friendReviewsGrid.Items.Add(new friendReview()
+                            {
+                                friendRName = reader.GetString(0),
+                                reviewBusiness = reader.GetString(1),
+                                reviewBusinessCity = reader.GetString(2),
+                                reviewText = reader.GetString(3)
+                                
                             });
                         }
                     }

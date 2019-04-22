@@ -56,7 +56,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="591" Margin="594,0,0,0" VerticalAlignment="Top" Width="344">
-                        <DataGrid HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
+                        <DataGrid x:Name="friendReviewsGrid" HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
                     </GroupBox>
 
                 </Grid>
