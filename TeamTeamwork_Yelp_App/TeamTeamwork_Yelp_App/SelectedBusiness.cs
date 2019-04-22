@@ -38,6 +38,11 @@ namespace TeamTeamwork_Yelp_App
 
         public void addFavorite(string userID)
         {
+            if (business == null)
+            {
+                return;
+            }
+
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
                 conn.Open();
@@ -55,7 +60,7 @@ namespace TeamTeamwork_Yelp_App
 
         public void setFriendsReviews(string userID, DataGrid reviewGrid)
         {
-            if (userID == null || userID == "")
+            if (userID == null || userID == "" || business == null)
             {
                 return;
             }
@@ -99,6 +104,11 @@ namespace TeamTeamwork_Yelp_App
 
         private void setBusinessCategories(ListBox categories)
         {
+            if (business == null)
+            {
+                return;
+            }
+
             categories.Items.Clear();
 
             using (var conn = new NpgsqlConnection(buildConnString()))
@@ -122,6 +132,11 @@ namespace TeamTeamwork_Yelp_App
 
         private void setBusinessHours(ListBox hours)
         {
+            if (business == null)
+            {
+                return;
+            }
+
             // clear items if there are any
             hours.Items.Clear();
 
@@ -152,6 +167,11 @@ namespace TeamTeamwork_Yelp_App
 
         private void setAttributes(TextBox attributes)
         {
+            if (business == null)
+            {
+                return;
+            }
+
             string attributesString = "";
 
             using (var conn = new NpgsqlConnection(buildConnString()))
@@ -199,6 +219,11 @@ namespace TeamTeamwork_Yelp_App
 
         public void checkin()
         {
+            if (business == null)
+            {
+                return;
+            }
+
             string currDay = DateTime.Now.DayOfWeek.ToString();
             string currMilTime = DateTime.Now.ToString("HH") + ":00:00";
             using (var conn = new NpgsqlConnection(buildConnString()))

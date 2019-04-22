@@ -46,17 +46,17 @@
                     </GroupBox>
                     <GroupBox Header="Favorite Businesses" HorizontalAlignment="Left" Height="163" Margin="10,428,0,0" VerticalAlignment="Top" Width="579">
                         <Grid>
-                            <DataGrid x:Name="usersBusinessGrid" HorizontalAlignment="Left" Width="566" Margin="0,0,0,-0.2" IsReadOnly="True"/>
+                            <DataGrid x:Name="usersBusinessGrid" HorizontalAlignment="Left" Width="566" Margin="0,0,0,10" IsReadOnly="True"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Friends" HorizontalAlignment="Left" Height="428" Margin="323,0,0,0" VerticalAlignment="Top" Width="266">
                         <Grid>
-                            <DataGrid x:Name="usersFriendsGrid" HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,23.6"/>
+                            <DataGrid x:Name="usersFriendsGrid" HorizontalAlignment="Left" Width="254" Margin="0,0,-0.4,23.6" IsReadOnly="True"/>
                             <Button x:Name="removeFavoriteBusinessBtn" Click="removeFromFavoritesBtnClicked" Content="Remove selected Business from Favorites" HorizontalAlignment="Left" Margin="0,381,-0.4,0" VerticalAlignment="Top" Width="254" Height="24"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="591" Margin="594,0,0,0" VerticalAlignment="Top" Width="344">
-                        <DataGrid x:Name="friendReviewsGrid" HorizontalAlignment="Left" Width="331" Margin="0,0,0,-0.2"/>
+                    <GroupBox Header="What are my friends reviewing?" HorizontalAlignment="Left" Height="583" Margin="594,0,0,0" VerticalAlignment="Top" Width="334">
+                        <DataGrid x:Name="friendReviewsGrid" HorizontalAlignment="Left" Width="324" Margin="0,0,-2,0" IsReadOnly="True"/>
                     </GroupBox>
 
                 </Grid>

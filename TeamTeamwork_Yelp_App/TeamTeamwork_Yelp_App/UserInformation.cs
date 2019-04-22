@@ -74,6 +74,11 @@ namespace TeamTeamwork_Yelp_App
 
         public void populateUserInfo(string userId, TextBox name, TextBox stars, TextBox fans, TextBox yps, TextBox funny, TextBox cool, TextBox useful, TextBox latitude, TextBox longitude)
         {
+            if (userId == null || userId == "")
+            {
+                return;
+            }
+
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
                 conn.Open();
@@ -120,6 +125,11 @@ namespace TeamTeamwork_Yelp_App
 
         public void updateLocation(string userId, double latitude, double longitude)
         {
+            if (userId == null || userId == "")
+            {
+                return;
+            }
+
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
                 conn.Open();
@@ -177,12 +187,6 @@ namespace TeamTeamwork_Yelp_App
             col5.Header = "Address";
             col5.Binding = new Binding("busAddress");
             grid.Columns.Add(col5);
-
-            DataGridTextColumn col6 = new DataGridTextColumn();
-            col6.Header = "BID...";
-            col6.Binding = new Binding("businessid");
-            col6.Width = 40;
-            grid.Columns.Add(col6);
         }
 
         public void addreviewingColumns(DataGrid grid)
@@ -288,7 +292,11 @@ namespace TeamTeamwork_Yelp_App
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "select users.name, businesses.name, businesses.city, reviews.text from users, friends, writesfor, reviews, businesses WHERE friends.userid = '" + userID + "' and friends.friendid = users.userid and friends.friendid = writesfor.userid and writesfor.reviewid = reviews.reviewid and writesfor.businessid = businesses.businessid;";
+                    cmd.CommandText = "SELECT DISTINCT ON(users.userid) users.name, businesses.name, businesses.city," +
+                        " reviews.text FROM users, friends, reviews, writesfor, businesses " +
+                        "WHERE friends.userid = '"+ userID +"' AND friends.friendid = users.userid AND " +
+                        "friends.friendid = writesfor.userid AND writesfor.reviewid = reviews.reviewid AND " +
+                        "writesfor.businessid = businesses.businessid ORDER by users.userid;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -310,6 +318,11 @@ namespace TeamTeamwork_Yelp_App
 
         public void removeFavorite(string userID, string bid)
         {
+            if (userID == null || userID == "" || bid == "" || bid == null)
+            {
+                return;
+            }
+
             using (var conn = new NpgsqlConnection(buildConnString()))
             {
                 conn.Open();

@@ -163,6 +163,9 @@ namespace TeamTeamwork_Yelp_App
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
                 SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
                 SB.checkin();
+
+                // Reload search results
+                searchBusinessesClicked(sender, e);
             }
         }
 
@@ -184,6 +187,9 @@ namespace TeamTeamwork_Yelp_App
                 Business selectedBusiness = (Business)searchResultsGrid.SelectedItem;
                 SelectedBusiness SB = new SelectedBusiness(selectedBusiness);
                 SB.addFavorite(currentUser);
+
+                // Refresh favorite businesses for users
+                UsI.setFavoriteBusinesses(currentUser, usersBusinessGrid);
             }
 
         }
@@ -239,6 +245,8 @@ namespace TeamTeamwork_Yelp_App
 
         private void EditUsI_Click(object sender, RoutedEventArgs e)
         {
+            latitudeBox.Text = "0.0";
+            longitudeBox.Text = "0.0";
             latitudeBox.IsEnabled = true;
             longitudeBox.IsEnabled = true;
         }
