@@ -296,7 +296,7 @@ namespace TeamTeamwork_Yelp_App
                         " reviews.text FROM users, friends, reviews, writesfor, businesses " +
                         "WHERE friends.userid = '"+ userID +"' AND friends.friendid = users.userid AND " +
                         "friends.friendid = writesfor.userid AND writesfor.reviewid = reviews.reviewid AND " +
-                        "writesfor.businessid = businesses.businessid ORDER by users.userid;";
+                        "writesfor.businessid = businesses.businessid ORDER by users.userid, reviews.reviewdate DESC;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
